@@ -483,6 +483,134 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Contact Form Handling with EmailJS
+(function() {
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const formData = {
+                name: contactForm.querySelector('input[name="name"]').value,
+                email: contactForm.querySelector('input[name="email"]').value,
+                company: contactForm.querySelector('input[name="company"]').value,
+                message: contactForm.querySelector('textarea[name="message"]').value
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                to_email: 'moe@dbay.dev',
+                from_name: formData.name,
+                from_email: formData.email,
+                company: formData.company,
+                message: formData.message,
+                reply_to: formData.email
+            })
+            .then(function(response) {
+                // Success
+                showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                // Error
+                showNotification('Failed to send message. Please try again or contact us directly.', 'error');
+                console.error('EmailJS Error:', error);
+            })
+            .finally(function() {
+                // Reset button state
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Notification function
+    function showNotification(message, type) {
+        // Remove existing notifications
+        const existingNotification = document.querySelector('.notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+        
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-message">${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
+        
+        // Add styles
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        `;
+        
+        // Add animation styles
+        const animationStyle = document.createElement('style');
+        animationStyle.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            .notification-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .notification-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+        `;
+        document.head.appendChild(animationStyle);
+        
+        // Add close functionality
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.remove();
+        });
+        
+        // Add to page
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+})();
+
 
 
 
