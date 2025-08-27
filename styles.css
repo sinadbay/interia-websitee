@@ -122,6 +122,7 @@ img {
     align-items: center;
     position: relative;
     overflow: hidden;
+    padding: 80px 0 40px 0; /* Add padding to account for fixed navbar */
 }
 
 .neuron-background {
@@ -1019,16 +1020,21 @@ section {
         text-align: center;
         gap: 2rem;
         padding: 0 15px;
+        min-height: calc(100vh - 120px); /* Ensure content fits in viewport */
+        justify-content: center;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
         line-height: 1.1;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
-        line-height: 1.5;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        word-wrap: break-word;
     }
 
     .hero-buttons {
@@ -1113,13 +1119,16 @@ section {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.6rem;
         line-height: 1.1;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 
     .hero-subtitle {
-        font-size: 0.9rem;
-        line-height: 1.4;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        word-wrap: break-word;
     }
 
     .section-title {
@@ -1179,11 +1188,16 @@ section {
 
 @media (max-width: 360px) {
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
+        line-height: 1.1;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 
     .hero-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        word-wrap: break-word;
     }
 
     .section-title {
@@ -1209,22 +1223,74 @@ section {
     }
 }
 
+/* Extra small screens (iPhone SE, small Android phones) */
+@media (max-width: 320px) {
+    .hero-title {
+        font-size: 1.2rem;
+        line-height: 1.1;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .hero-subtitle {
+        font-size: 0.7rem;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+
+    .hero-content {
+        padding: 0 8px;
+        gap: 1.5rem;
+    }
+
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        max-width: 160px;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .nav-logo-image {
+        height: 22px;
+    }
+
+    .logo-display-container {
+        transform: scale(0.5);
+    }
+}
+
 /* Add fluid typography for better responsiveness */
 @media (min-width: 320px) and (max-width: 1200px) {
     .hero-title {
-        font-size: clamp(1.8rem, 5vw, 3.5rem);
+        font-size: clamp(1.4rem, 4vw, 3.5rem);
+        line-height: 1.1;
+        word-wrap: break-word;
+        hyphens: auto;
     }
     
     .hero-subtitle {
-        font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+        font-size: clamp(0.75rem, 2vw, 1.2rem);
+        line-height: 1.4;
+        word-wrap: break-word;
     }
     
     .section-title {
-        font-size: clamp(1.6rem, 4vw, 2.5rem);
+        font-size: clamp(1.4rem, 3.5vw, 2.5rem);
     }
     
     .section-subtitle {
-        font-size: clamp(0.85rem, 2vw, 1.1rem);
+        font-size: clamp(0.75rem, 1.8vw, 1.1rem);
     }
 }
 
