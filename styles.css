@@ -172,6 +172,12 @@ img {
     padding: 0 20px;
 }
 
+.hero-text {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
@@ -1032,9 +1038,11 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.9rem;
-        line-height: 1.4;
+        font-size: 0.8rem;
+        line-height: 1.3;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
 
     .hero-buttons {
@@ -1126,9 +1134,11 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         line-height: 1.3;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
 
     .section-title {
@@ -1195,9 +1205,11 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
         line-height: 1.3;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
 
     .section-title {
@@ -1233,9 +1245,11 @@ section {
     }
 
     .hero-subtitle {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         line-height: 1.3;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
 
     .hero-content {
@@ -1273,24 +1287,27 @@ section {
 /* Add fluid typography for better responsiveness */
 @media (min-width: 320px) and (max-width: 1200px) {
     .hero-title {
-        font-size: clamp(1.4rem, 4vw, 3.5rem);
+        font-size: clamp(1.2rem, 3.5vw, 3.5rem);
         line-height: 1.1;
         word-wrap: break-word;
         hyphens: auto;
+        overflow-wrap: break-word;
     }
     
     .hero-subtitle {
-        font-size: clamp(0.75rem, 2vw, 1.2rem);
-        line-height: 1.4;
+        font-size: clamp(0.65rem, 1.8vw, 1.2rem);
+        line-height: 1.3;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
     }
     
     .section-title {
-        font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+        font-size: clamp(1.2rem, 3vw, 2.5rem);
     }
     
     .section-subtitle {
-        font-size: clamp(0.75rem, 1.8vw, 1.1rem);
+        font-size: clamp(0.65rem, 1.6vw, 1.1rem);
     }
 }
 
