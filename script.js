@@ -512,9 +512,8 @@ document.head.appendChild(style);
             
             // Send email using EmailJS
             emailjs.send('service_uaiznu8', 'template_fmsotjd', {
-                to_email: 'moe@dbay.dev',
-                from_name: formData.name,
-                from_email: formData.email,
+                name: formData.name,
+                email: formData.email,
                 company: formData.company,
                 message: formData.message,
                 reply_to: formData.email
