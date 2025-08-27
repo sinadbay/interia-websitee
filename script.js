@@ -486,7 +486,7 @@ document.head.appendChild(style);
 // Contact Form Handling with EmailJS
 (function() {
     // Initialize EmailJS
-    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    emailjs.init("JCdSg-L1I7Dyr_bTR");
     
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -511,7 +511,7 @@ document.head.appendChild(style);
             };
             
             // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+            emailjs.send('service_uaiznu8', 'template_fmsotjd', {
                 to_email: 'moe@dbay.dev',
                 from_name: formData.name,
                 from_email: formData.email,
