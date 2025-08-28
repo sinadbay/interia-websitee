@@ -100,12 +100,19 @@
                             id="interia-video"
                             width="100%" 
                             height="400" 
-                            src="https://youtu.be/kLiQJZUTtQw?enablejsapi=1&autoplay=0&mute=0"
+                            src="https://www.youtube.com/embed/kLiQJZUTtQw?enablejsapi=1&autoplay=1&mute=0&rel=0&modestbranding=1&origin=https://www.interiax.com"
                             title="Interia - Immersive VR Real Estate Experiences"
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         </iframe>
+                        <div class="video-fallback" style="display: none; text-align: center; padding: 40px; background: rgba(0,0,0,0.1); border-radius: 10px;">
+                            <i class="fas fa-play-circle" style="font-size: 3rem; color: #00d4ff; margin-bottom: 20px;"></i>
+                            <h3>Video Unavailable</h3>
+                            <p>Please visit our <a href="https://www.youtube.com/watch?v=kLiQJZUTtQw" target="_blank" style="color: #00d4ff;">YouTube channel</a> to watch the video.</p>
+                        </div>
                     </div>
                 </div>
             </div>
