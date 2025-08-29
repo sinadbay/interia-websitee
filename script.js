@@ -488,6 +488,25 @@ document.head.appendChild(style);
     // Initialize EmailJS
     emailjs.init("JCdSg-L1I7Dyr_bTR");
     
+    // Track page views and interactions
+    if (typeof gtag !== 'undefined') {
+        // Track page view
+        gtag('event', 'page_view', {
+            'page_title': 'Interia - AI-Powered VR Architecture',
+            'page_location': window.location.href
+        });
+        
+        // Track button clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.classList.contains('btn')) {
+                gtag('event', 'button_click', {
+                    'event_category': 'engagement',
+                    'event_label': e.target.textContent.trim()
+                });
+            }
+        });
+    }
+    
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = submitBtn.querySelector('.btn-text');
@@ -522,6 +541,14 @@ document.head.appendChild(style);
                 // Success
                 showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
                 contactForm.reset();
+                
+                // Track successful form submission in Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'contact',
+                        'event_label': 'contact_form_success'
+                    });
+                }
             })
             .catch(function(error) {
                 // Error
