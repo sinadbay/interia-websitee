@@ -1,0 +1,20 @@
+# Large image files that exceed Git repository limits
+interia.png
+interia_transparent.png
+
+# Large video files
+interia.mp4
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# General Git ignores
+.DS_Store
+*.log
+node_modules/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
