@@ -1311,6 +1311,273 @@ section {
     }
 }
 
+/* Interactive Animated Logo Styles */
+.interactive-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 500px;
+    position: relative;
+}
+
+.logo-orbital-system {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-center {
+    position: relative;
+    z-index: 10;
+    animation: logo-float 3s ease-in-out infinite;
+}
+
+.main-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+    transition: all 0.3s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8));
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: logo-glow-pulse 2s ease-in-out infinite;
+}
+
+.orbital-ring {
+    position: absolute;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    animation: ring-rotate 20s linear infinite;
+}
+
+.ring-1 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 15s;
+}
+
+.ring-2 {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 25s;
+    animation-direction: reverse;
+}
+
+.orbital-particle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 212, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    animation: particle-glow 2s ease-in-out infinite alternate;
+}
+
+.ring-1 .orbital-particle {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ring-1 .particle-2 {
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+}
+
+.ring-1 .particle-3 {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ring-2 .particle-4 {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ring-2 .particle-5 {
+    top: 25%;
+    right: -20px;
+    transform: translateY(-50%);
+}
+
+.ring-2 .particle-6 {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ring-2 .particle-7 {
+    top: 25%;
+    left: -20px;
+    transform: translateY(-50%);
+}
+
+.data-streams {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.data-stream {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(180deg, transparent, #00d4ff, transparent);
+    animation: data-stream-flow 3s ease-in-out infinite;
+}
+
+.stream-1 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.stream-2 {
+    top: 30%;
+    right: 20%;
+    animation-delay: 0.5s;
+}
+
+.stream-3 {
+    bottom: 30%;
+    left: 30%;
+    animation-delay: 1s;
+}
+
+.stream-4 {
+    bottom: 20%;
+    right: 30%;
+    animation-delay: 1.5s;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-element {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float-around 8s ease-in-out infinite;
+}
+
+.element-1 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.element-2 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.element-3 {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 4s;
+}
+
+.element-4 {
+    bottom: 10%;
+    right: 15%;
+    animation-delay: 6s;
+}
+
+/* Logo Animations */
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes logo-glow-pulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes ring-rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes particle-glow {
+    0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+    100% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
+}
+
+@keyframes data-stream-flow {
+    0%, 100% { opacity: 0; transform: translateY(-20px); }
+    50% { opacity: 1; transform: translateY(20px); }
+}
+
+@keyframes float-around {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(90deg); }
+    50% { transform: translateY(0px) rotate(180deg); }
+    75% { transform: translateY(-10px) rotate(270deg); }
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.how-it-works::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 /* Interactive Data Pipeline Styles */
 .data-pipeline {
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(0, 153, 204, 0.05));
@@ -1497,6 +1764,122 @@ section {
     100% { left: 100%; opacity: 0; }
 }
 
+
+/* Mobile Responsive Interactive Logo */
+@media (max-width: 1024px) {
+    .logo-orbital-system {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .main-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .logo-glow {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .ring-1 {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .ring-2 {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .orbital-particle {
+        width: 35px;
+        height: 35px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .interactive-logo-container {
+        min-height: 400px;
+    }
+    
+    .logo-orbital-system {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .main-logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .logo-glow {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .ring-1 {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .ring-2 {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .orbital-particle {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+    
+    .floating-element {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .interactive-logo-container {
+        min-height: 350px;
+    }
+    
+    .logo-orbital-system {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .main-logo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .logo-glow {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .ring-1 {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .ring-2 {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .orbital-particle {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+    }
+    
+    .floating-element {
+        font-size: 1.4rem;
+    }
+}
 
 /* Mobile Responsive Pipeline */
 @media (max-width: 1024px) {

@@ -726,10 +726,197 @@ function initializeDataPipeline() {
     }
 }
 
-// Initialize Data Pipeline when DOM is loaded
+// Initialize Interactive Logo when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    initializeInteractiveLogo();
     initializeDataPipeline();
+    initializeAutoScroll();
 });
+
+// Interactive Logo Animation System
+function initializeInteractiveLogo() {
+    const logoContainer = document.querySelector('.interactive-logo-container');
+    if (!logoContainer) return;
+    
+    // Add mouse interaction effects
+    logoContainer.addEventListener('mousemove', function(e) {
+        const rect = logoContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const distance = Math.sqrt(x * x + y * y);
+        const maxDistance = 200;
+        
+        if (distance < maxDistance) {
+            const intensity = 1 - (distance / maxDistance);
+            const logoCenter = logoContainer.querySelector('.logo-center');
+            const orbitalRings = logoContainer.querySelectorAll('.orbital-ring');
+            
+            if (logoCenter) {
+                logoCenter.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            }
+            
+            orbitalRings.forEach((ring, index) => {
+                const speed = intensity * (index + 1) * 0.5;
+                ring.style.animationDuration = `${20 - speed}s`;
+            });
+        }
+    });
+    
+    logoContainer.addEventListener('mouseleave', function() {
+        const logoCenter = logoContainer.querySelector('.logo-center');
+        const orbitalRings = logoContainer.querySelectorAll('.orbital-ring');
+        
+        if (logoCenter) {
+            logoCenter.style.transform = '';
+        }
+        
+        orbitalRings.forEach((ring, index) => {
+            ring.style.animationDuration = '';
+        });
+    });
+    
+    // Track logo interaction in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        logoContainer.addEventListener('click', function() {
+            gtag('event', 'logo_interaction', {
+                'event_category': 'Interaction',
+                'event_label': 'Interactive Logo Clicked',
+                'value': 1
+            });
+        });
+    }
+}
+
+// Auto-Scroll Timer System
+function initializeAutoScroll() {
+    let autoScrollTimer;
+    let isUserScrolling = false;
+    let currentSection = 0; // 0 = Hero, 1 = How It Works
+    const sections = ['#home', '#how-it-works'];
+    const scrollInterval = 20000; // 25 seconds
+    
+    // Function to scroll to next section
+    function scrollToNextSection() {
+        if (isUserScrolling) return; // Don't auto-scroll if user is scrolling
+        
+        currentSection = (currentSection + 1) % sections.length;
+        const targetSection = document.querySelector(sections[currentSection]);
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Track auto-scroll in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'auto_scroll', {
+                    'event_category': 'Navigation',
+                    'event_label': `Auto-scrolled to ${sections[currentSection]}`,
+                    'value': 1
+                });
+            }
+        }
+    }
+    
+    // Function to start auto-scroll timer
+    function startAutoScroll() {
+        if (autoScrollTimer) clearInterval(autoScrollTimer);
+        autoScrollTimer = setInterval(scrollToNextSection, scrollInterval);
+    }
+    
+    // Function to stop auto-scroll timer
+    function stopAutoScroll() {
+        if (autoScrollTimer) {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = null;
+        }
+    }
+    
+    // Function to reset auto-scroll timer
+    function resetAutoScroll() {
+        stopAutoScroll();
+        setTimeout(() => {
+            if (!isUserScrolling) {
+                startAutoScroll();
+            }
+        }, 5000); // Wait 5 seconds before restarting
+    }
+    
+    // Detect user scrolling
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        isUserScrolling = true;
+        stopAutoScroll();
+        
+        // Clear existing timeout
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        
+        // Set timeout to detect when user stops scrolling
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+            resetAutoScroll();
+        }, 3000); // Wait 3 seconds after user stops scrolling
+    });
+    
+    // Detect user interaction with navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            isUserScrolling = true;
+            stopAutoScroll();
+            
+            // Reset timer after navigation
+            setTimeout(() => {
+                isUserScrolling = false;
+                resetAutoScroll();
+            }, 5000);
+        });
+    });
+    
+    // Detect user interaction with buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            isUserScrolling = true;
+            stopAutoScroll();
+            
+            // Reset timer after button click
+            setTimeout(() => {
+                isUserScrolling = false;
+                resetAutoScroll();
+            }, 5000);
+        });
+    });
+    
+    // Start auto-scroll when page loads
+    setTimeout(() => {
+        if (!isUserScrolling) {
+            startAutoScroll();
+        }
+    }, 5000); // Wait 5 seconds after page load
+    
+    // Pause auto-scroll when page is not visible
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            stopAutoScroll();
+        } else {
+            if (!isUserScrolling) {
+                resetAutoScroll();
+            }
+        }
+    });
+    
+    // Track auto-scroll initialization in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'auto_scroll_initialized', {
+            'event_category': 'Navigation',
+            'event_label': 'Auto-scroll timer started',
+            'value': 1
+        });
+    }
+}
 
 // Add CSS animations for pipeline
 const pipelineStyle = document.createElement('style');
