@@ -637,6 +637,109 @@ document.head.appendChild(style);
     }
 })();
 
+// Interactive Data Pipeline Animation System
+function initializeDataPipeline() {
+    const pipelineNodes = document.querySelectorAll('.pipeline-node');
+    
+    if (!pipelineNodes.length) return;
+    
+    let currentStep = 0;
+    let isRunning = true;
+    
+    // Start the pipeline automatically
+    startPipelineAnimation();
+    
+    function startPipelineAnimation() {
+        // Start the pipeline sequence
+        animatePipeline();
+        
+        // Track pipeline start in Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'pipeline_auto_start', {
+                'event_category': 'Interaction',
+                'event_label': 'Data Pipeline Auto Started',
+                'value': 1
+            });
+        }
+    }
+    
+    function animatePipeline() {
+        currentStep = 0;
+        
+        function processNextStep() {
+            if (currentStep < pipelineNodes.length) {
+                const node = pipelineNodes[currentStep];
+                
+                // Mark previous step as completed
+                if (currentStep > 0) {
+                    pipelineNodes[currentStep - 1].classList.remove('active');
+                    pipelineNodes[currentStep - 1].classList.add('completed');
+                }
+                
+                // Activate current step
+                node.classList.add('active');
+                
+                currentStep++;
+                
+                // Continue to next step after delay
+                setTimeout(processNextStep, 2000);
+            } else {
+                // Pipeline complete - restart cycle
+                setTimeout(() => {
+                    pipelineNodes.forEach(node => {
+                        node.classList.remove('active', 'completed');
+                    });
+                    
+                    // Restart the cycle
+                    setTimeout(() => {
+                        animatePipeline();
+                    }, 3000);
+                    
+                    // Track completion
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'pipeline_cycle_complete', {
+                            'event_category': 'Interaction',
+                            'event_label': 'Data Pipeline Cycle Complete',
+                            'value': 1
+                        });
+                    }
+                }, 2000);
+            }
+        }
+        
+        processNextStep();
+    }
+    
+    // Auto-start pipeline when it comes into view
+    const pipelineContainer = document.querySelector('.data-pipeline');
+    if (pipelineContainer) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isRunning) {
+                    isRunning = true;
+                    startPipelineAnimation();
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(pipelineContainer);
+    }
+}
 
+// Initialize Data Pipeline when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeDataPipeline();
+});
+
+// Add CSS animations for pipeline
+const pipelineStyle = document.createElement('style');
+pipelineStyle.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(pipelineStyle);
 
 
